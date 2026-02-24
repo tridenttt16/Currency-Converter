@@ -1,0 +1,113 @@
+package currencyConverter;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Desktop;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URI;
+import java.util.ResourceBundle;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+/**
+ * AboutWindow - Professional implementation using LayoutManagers.
+ * 
+ * Uses:
+ * - BorderLayout (main container)
+ * - BoxLayout (vertical alignment)
+ * 
+ * Fully responsive and resolution independent.
+ */
+public class AboutWindow extends JFrame {
+
+    private static final ResourceBundle BUNDLE =
+            ResourceBundle.getBundle("localization.translation");
+
+    private static AboutWindow windowInstance = null;
+
+    private AboutWindow() {
+
+        setTitle(BUNDLE.getString("AboutWindow.this.title"));
+        setSize(350, 260);
+        setLocationRelativeTo(null);
+        setResizable(false);
+
+        // Main container with BorderLayout
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        setContentPane(mainPanel);
+
+        // Center panel using vertical BoxLayout
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+
+        // -------- TITLE --------
+        JLabel lblTitle = new JLabel("Currency Converter");
+        lblTitle.setFont(new Font("Noto Sans", Font.BOLD, 16));
+        lblTitle.setAlignmentX(CENTER_ALIGNMENT);
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // -------- VERSION --------
+        JLabel lblVersion = new JLabel("Version 1.0");
+        lblVersion.setAlignmentX(CENTER_ALIGNMENT);
+
+        // -------- LICENSE --------
+        JLabel lblLicense = new JLabel("License GNU GPL v3.0");
+        lblLicense.setAlignmentX(CENTER_ALIGNMENT);
+
+        // -------- AUTHOR --------
+        JLabel lblAuthor = new JLabel(
+                BUNDLE.getString("AboutWindow.lblAuthor.text"));
+        lblAuthor.setAlignmentX(CENTER_ALIGNMENT);
+
+        // -------- CLICKABLE LINK --------
+        JLabel lblLink = new JLabel("<html><a href=''>http://jvinceno.fr</a></html>");
+        lblLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        lblLink.setForeground(Color.BLUE);
+        lblLink.setAlignmentX(CENTER_ALIGNMENT);
+
+        lblLink.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(
+                            new URI("http://www.jvinceno.fr"));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        // Add spacing + components
+        centerPanel.add(lblTitle);
+        centerPanel.add(Box.createVerticalStrut(10));
+        centerPanel.add(lblVersion);
+        centerPanel.add(Box.createVerticalStrut(10));
+        centerPanel.add(lblLicense);
+        centerPanel.add(Box.createVerticalStrut(15));
+        centerPanel.add(lblAuthor);
+        centerPanel.add(Box.createVerticalStrut(10));
+        centerPanel.add(lblLink);
+
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
+    }
+
+    /**
+     * Singleton pattern to ensure single About window instance.
+     */
+    public static AboutWindow getInstance() {
+        if (windowInstance == null) {
+            windowInstance = new AboutWindow();
+        }
+        return windowInstance;
+    }
+}
