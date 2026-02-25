@@ -1,0 +1,184 @@
+Code of adding currencies pf different countries
+
+package currencyConverter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Currency {
+	private String name;
+	private String shortName;
+	private HashMap<String, Double> exchangeValues = new HashMap<String, Double>();
+	
+	// "Currency" Constructor
+	public Currency(String nameValue, String shortNameValue) {
+		this.name = nameValue;
+		this.shortName = shortNameValue;
+	}
+	
+	// Getter for name
+	public String getName() {
+		return this.name;
+	}
+	
+	// Setter for name
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	// Getter for shortName
+	public String getShortName() {
+		return this.shortName;
+	}
+	
+	// Setter for shortName
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+	
+	// Getter for exchangeValues
+	public HashMap<String, Double> getExchangeValues() {
+		return this.exchangeValues;
+	}
+	
+	// Setter for exchangeValues
+	public void setExchangeValues(String key, Double value) {
+		this.exchangeValues.put(key, value);
+	}
+	
+	// Set default values for a currency
+	public void defaultValues() {
+		String currency = this.name;
+		
+		switch (currency) {	
+			case "US Dollar":
+				this.exchangeValues.put("USD", 1.00);
+				this.exchangeValues.put("EUR", 0.93);
+				this.exchangeValues.put("GBP", 0.78);
+				this.exchangeValues.put("CHF", 1.08);
+				this.exchangeValues.put("NZD", 1.67);
+				this.exchangeValues.put("INR", 90.92);
+				this.exchangeValues.put("YEN", 155.61);
+				this.exchangeValues.put("MXN", 17.23);
+				this.exchangeValues.put("CNY", 6.89);
+				break;
+			case "Euro":
+				this.exchangeValues.put("USD", 1.177);
+				this.exchangeValues.put("EUR", 1.00);
+				this.exchangeValues.put("GBP", 0.87);
+				this.exchangeValues.put("CHF", 0.912);
+				this.exchangeValues.put("NZD", 1.97);
+				this.exchangeValues.put("INR", 107.102);
+				this.exchangeValues.put("YEN", 183.299);
+				this.exchangeValues.put("MXN", 20.30);
+				this.exchangeValues.put("CNY", 8.12);
+				break;
+			case "British Pound":
+				this.exchangeValues.put("USD", 1.34);
+				this.exchangeValues.put("EUR", 1.14);
+				this.exchangeValues.put("GBP", 1.00);
+				this.exchangeValues.put("CHF", 1.04);
+				this.exchangeValues.put("NZD", 2.26);
+				this.exchangeValues.put("INR", 122.70);
+				this.exchangeValues.put("YEN", 209.99);
+				this.exchangeValues.put("MXN", 23.26);
+				this.exchangeValues.put("CNY", 9.30);
+				break;
+			case "Swiss Franc":
+				this.exchangeValues.put("USD", 1.29);
+				this.exchangeValues.put("EUR", 1.09);
+				this.exchangeValues.put("GBP", 0.956);
+				this.exchangeValues.put("CHF", 1.00);
+				this.exchangeValues.put("NZD", 2.16);
+				this.exchangeValues.put("INR", 117.385);
+				this.exchangeValues.put("YEN", 200.89);
+				this.exchangeValues.put("MXN", 22.25);
+				this.exchangeValues.put("CNY", 8.90);
+				break;
+			case "Chinese Yuan Renminbi":
+			    this.exchangeValues.put("USD", 0.14);
+				this.exchangeValues.put("EUR", 0.12);
+				this.exchangeValues.put("GBP", 0.107);
+				this.exchangeValues.put("CHF", 0.11);
+				this.exchangeValues.put("NZD", 0.24);
+				this.exchangeValues.put("INR", 13.18);
+				this.exchangeValues.put("YEN", 22.56);
+				this.exchangeValues.put("MXN", 2.499);
+				this.exchangeValues.put("CNY", 1);
+				break;
+			case "NewZealand Dollar":
+				this.exchangeValues.put("USD", 0.59);
+				this.exchangeValues.put("EUR", 0.50);
+				this.exchangeValues.put("GBP", 0.44);
+				this.exchangeValues.put("CHF", 0.46);
+				this.exchangeValues.put("NZD", 1.00);
+				this.exchangeValues.put("INR", 54.20);
+				this.exchangeValues.put("YEN", 92.767);
+				this.exchangeValues.put("MXN", 10.27);
+				this.exchangeValues.put("CNY", 4.10);
+				break;
+			case "Indian Rupees":
+				this.exchangeValues.put("USD", 0.011);
+				this.exchangeValues.put("EUR", 0.009);
+				this.exchangeValues.put("GBP", 0.008);
+				this.exchangeValues.put("CHF", 0.008);
+				this.exchangeValues.put("NZD", 0.018);
+				this.exchangeValues.put("INR", 1.00);
+				this.exchangeValues.put("YEN", 1.711);
+				this.exchangeValues.put("MXN", 0.18);
+				this.exchangeValues.put("CNY", 0.075);
+				break;
+			case "Japanese Yen":
+			    this.exchangeValues.put("USD", 0.006);
+				this.exchangeValues.put("EUR", 0.005);
+				this.exchangeValues.put("GBP", 0.004);
+				this.exchangeValues.put("CHF", 0.004);
+				this.exchangeValues.put("NZD", 0.010);
+				this.exchangeValues.put("INR", 0.584);
+				this.exchangeValues.put("YEN", 1.00);
+				this.exchangeValues.put("MXN", 0.110);
+				this.exchangeValues.put("CNY", 0.044);
+				break;
+			case "Mexican Peso":
+				this.exchangeValues.put("USD", 0.058);
+				this.exchangeValues.put("EUR", 0.049);
+				this.exchangeValues.put("GBP", 0.042);
+				this.exchangeValues.put("CHF", 0.044);
+				this.exchangeValues.put("NZD", 0.097);
+				this.exchangeValues.put("INR", 5.27);
+				this.exchangeValues.put("YEN", 9.02);
+				this.exchangeValues.put("MXN", 1.00);
+				this.exchangeValues.put("CNY", 0.399);
+				break;
+		}
+	}
+	
+	// Initialize currencies
+	public static ArrayList<Currency> init() {
+		ArrayList<Currency> currencies = new ArrayList<Currency>();
+				
+		currencies.add( new Currency("US Dollar", "USD") );
+		currencies.add( new Currency("Euro", "EUR") );
+		currencies.add( new Currency("British Pound", "GBP") );
+		currencies.add( new Currency("Swiss Franc", "CHF") );
+		currencies.add( new Currency("Chinese Yuan Renminbi", "CNY") );
+		currencies.add( new Currency("Japanese Yen", "JPY") );
+		currencies.add( new Currency("Indian Rupees", "INR") );
+		currencies.add( new Currency("Mexican Peso", "MXN") );
+		
+		for (Integer i =0; i < currencies.size(); i++) {
+			currencies.get(i).defaultValues();
+		}		
+		
+		return currencies;
+	}
+	
+	// Convert a currency to another
+	public static Double convert(Double amount, Double exchangeValue) {
+		Double price;
+		price = amount * exchangeValue;
+		price = Math.round(price * 100d) / 100d;
+		
+		return price;
+	}
+}
